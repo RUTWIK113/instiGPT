@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  
+  --color-bg: #040806;
+  --color-card-bg: rgba(14, 25, 20, 0.6);
+  --color-accent: #00ff9d;
+  --color-accent-dim: rgba(0, 255, 157, 0.1);
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-text-main: #fcfcfd;
+  --color-text-dim: #8ba398;
+  --color-border: rgba(0, 255, 157, 0.15);
+}
+
+/* High Contrast Dark Mode Overrides */
+.high-contrast {
+  --color-bg: #000000;
+  --color-card-bg: #000000;
+  --color-accent: #ffffff;
+  --color-accent-dim: rgba(255, 255, 255, 0.1);
+  --color-border: #ffffff;
+  --color-text-main: #ffffff;
+  --color-text-dim: #f0f0f0;
+  --color-success: #00ff00;
+  --color-warning: #ffff00;
+}
+
+@layer base {
+  body {
+    @apply antialiased bg-[#040806] text-text-main font-sans selection:bg-accent selection:text-bg;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(0, 255, 157, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(8, 16, 12, 1) 0%, rgba(4, 8, 6, 1) 100%),
+      radial-gradient(circle at 50% -10%, rgba(5, 150, 105, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 0% 100%, rgba(0, 255, 157, 0.1) 0%, transparent 50%);
+    background-attachment: fixed;
+    transition: background-color 0.3s ease;
+  }
+
+  .high-contrast body {
+    background-image: none !important;
+    background-color: #000000 !important;
+  }
+}
+
+.glass {
+  @apply backdrop-blur-3xl bg-card-bg border border-border shadow-[0_8px_32px_rgba(0,0,0,0.37)];
+  transition: all 0.3s ease;
+}
+
+.high-contrast .glass {
+  background: #000000 !important;
+  border-color: #ffffff !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.high-contrast .organic-glow {
+  display: none !important;
+}
+
+.high-contrast input, 
+.high-contrast textarea {
+  background-color: #000000 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.high-contrast button:not(.bg-accent) {
+  background-color: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+.high-contrast .bg-accent {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.organic-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #9d75ff 0%, transparent 70%);
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rays-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.rays-bg::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250%;
+  height: 250%;
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    transparent 0deg,
+    rgba(157, 117, 255, 0.15) 20deg,
+    transparent 40deg,
+    rgba(236, 72, 153, 0.1) 60deg,
+    transparent 80deg,
+    rgba(157, 117, 255, 0.2) 100deg,
+    transparent 120deg,
+    rgba(236, 72, 153, 0.1) 140deg,
+    transparent 160deg,
+    rgba(157, 117, 255, 0.15) 180deg,
+    transparent 200deg,
+    rgba(236, 72, 153, 0.1) 220deg,
+    transparent 240deg,
+    rgba(157, 117, 255, 0.2) 260deg,
+    transparent 280deg,
+    rgba(236, 72, 153, 0.1) 300deg,
+    transparent 320deg,
+    rgba(157, 117, 255, 0.15) 340deg,
+    transparent 360deg
+  );
+  animation: rotate 120s linear infinite;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.markdown-body {
+  @apply text-sm leading-relaxed space-y-3;
+}
+
+.markdown-body p {
+  @apply mb-2;
+}
+
+.markdown-body ul {
+  @apply list-disc list-inside space-y-1 my-2;
+}
+
+.markdown-body ol {
+  @apply list-decimal list-inside space-y-1 my-2;
+}
+
+.markdown-body strong {
+  @apply font-bold text-accent;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+  @apply font-bold mt-4 mb-2 text-text-main;
+}
+
+.markdown-body blockquote {
+  @apply border-l-4 border-border pl-4 py-1 italic text-text-dim bg-card-bg/50 rounded-r-lg;
+}
+
+.markdown-body code {
+  @apply bg-border px-1 rounded text-accent font-mono text-xs;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-border rounded-full hover:bg-zinc-600 transition-colors;
+}

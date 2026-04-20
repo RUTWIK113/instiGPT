@@ -1,0 +1,6 @@
+{
+  "name": "instiGPT",
+  "description": "Your intelligent campus sidekick. Managing academics, campus life, and peer connections at your institute.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": []
+}
